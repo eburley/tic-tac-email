@@ -1,0 +1,11 @@
+<html>
+<body>
+{% if user %}    
+    <h1>Hi there {{ user.nickname()}}</h1>
+    <a href='{{url_for('newGame') }}'><button>New Game</button></a>
+{% else %}
+    <h1>Lets sign in to the app</h1>
+    <a href='{{ url_for('login') }}'><button>click here</button></a>
+{% endif %}
+</body>
+</html>
