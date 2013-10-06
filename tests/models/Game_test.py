@@ -2,18 +2,24 @@ import unittest
 import mock
 
 from google.appengine.ext import ndb
+from google.appengine.api import users
+from google.appengine.ext import testbed
 
 import models.game as game
-import models.user as user
-
 
 class TestGame(unittest.TestCase):
-    
 
     def setUp(self):
-        self.player_X = ndb.Key(user.User, 'playerX')
-        self.player_O = ndb.Key(user.User, 'playerO')
+        self.testbed = testbed.Testbed()
+        self.testbed.activate()
+        self.testbed.init_all_stubs()
+
+        self.player_X = users.User(email='foo@bar.com')
+        self.player_O = users.User(email='bar@bar.com')
         self.the_game = game.Game(player_X=self.player_X, player_O=self.player_O)
+
+    def tearDown(self):
+        self.testbed.deactivate()
 
     def test_model(self):        
         self.assertEqual(self.the_game.player_X, self.player_X)

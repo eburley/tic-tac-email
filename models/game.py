@@ -1,8 +1,5 @@
 from google.appengine.ext import ndb
 
-import user
-
-
 X_SYMBOL = 'X'
 O_SYMBOL = 'O'
 EMPTY_SYMBOL = '_'
@@ -20,8 +17,17 @@ class GameState:
     GAME_OVER_DRAW='Draw'
 
 class Game(ndb.Model):
-    player_X = ndb.KeyProperty()
-    player_O = ndb.KeyProperty()
+    """
+    Represent the game state.  
+    player_X and player_O are user properties
+    because we're intent on using email
+
+    board is a string instead of something
+    more structured because it might be interesting
+    to build statistics based on this.
+    """
+    player_X = ndb.UserProperty()
+    player_O = ndb.UserProperty()
     board = ndb.StringProperty(default=BLANK_BOARD)
 
     def move(self, row, column, symbol):
