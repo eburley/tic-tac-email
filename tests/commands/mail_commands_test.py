@@ -84,6 +84,9 @@ class TestMailCommands(unittest.TestCase):
         self.assertTrue(invitor.email() in mock_args[2])
         # should have called JINJA 
         self.assertTrue(JINJA_ENVIRONMENT.get_template.called)
+        # should have given the template some game context
+        renderer = JINJA_ENVIRONMENT.get_template.return_value.render
+        self.assertTrue('game' in renderer.call_args[0][0], 'game should be passed')
 
 
 

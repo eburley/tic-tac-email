@@ -1,5 +1,27 @@
+{% macro piece(ch) -%}
+{% if space == '_' %}&nbsp;{% else %}{{ space | capitalize }}{% endif %}
+{%- endmacro %}
+
+{% macro render_board_html(game) -%}
+    <table style='border-collapse:collapse;border:1px solid black'>
+    {% for row in game.board | batch(3) %}            
+        <tr>
+        {% for space in row %}        
+        <td style='height:1.5em; text-align:center; vertical-align:bottom; width:2em; border:1px solid black'>
+            {{ piece(space) }}            
+        </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+{%- endmacro %}
+
+
 <h1>Hi {{name}} <br />
     Come play a game of tic-tac-toe with
     {{ opponent_name }}</h1>
 
-<p>It's your move - to move put an X in one of the open spots</p>
+<p>It's your move - to move put an X in one of the open spots:</p>
+
+{{ render_board_html(game) }}
+

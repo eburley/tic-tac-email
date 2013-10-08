@@ -1,3 +1,21 @@
+{% macro piece(ch) %}
+{% if space == '_' %} {% else %}{{ space | capitalize }}{% endif %}
+{% endmacro %}
+
+{% macro render_board_text(game) -%}
+-------------------------------
+{{ piece(game.board[0])}} | {{ piece(game.board[1])}} | {{ piece(game.board[2])}}
+{{ piece(game.board[3])}} | {{ piece(game.board[4])}} | {{ piece(game.board[5])}}
+{{ piece(game.board[6])}} | {{ piece(game.board[7])}} | {{ piece(game.board[8])}}
+-------------------------------
+{%- endmacro %}
+
+
 Hi {{name}}
     Come play a game of tic-tac-toe with
     {{ opponent_name }}!
+
+Just put an X in an open spot below:
+
+{{ render_board_text(game) }}
+

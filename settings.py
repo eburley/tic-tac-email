@@ -12,5 +12,11 @@ JINJA_ENVIRONMENT.globals['url_for'] = webapp2.uri_for
 class SendgridAccount:
     username = 'foo'
     password = 'password'
-    from_domain = 'eburley.com'
-    sender_email = 'tictactoe@eburley.com'
+    from_domain = 'example.com'
+    sender_email = 'tictactoe@example.com'
+
+# load settings_local if it exists...
+try:
+    import settings_local
+except Exception, e:
+    pass

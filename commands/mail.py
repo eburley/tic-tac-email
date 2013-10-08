@@ -39,7 +39,8 @@ def send_game_invite(game, context=None):
     invitor = game.player_O
     context = context or {}
     context.update({'name': invitee.nickname(),
-               'opponent_name': invitor.nickname(),})
+               'opponent_name': invitor.nickname(),
+               'game': game})
     html = html_template.render(context)
     plaintext = plain_template.render(context)
 
